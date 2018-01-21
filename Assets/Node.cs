@@ -59,19 +59,4 @@ public class Node : MonoBehaviour
 	{
 		connections = new Dictionary<Node, float> ();
 	}
-
-
-	// Use this for initialization
-	void Start ()
-	{
-		
-	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-		
-	}
-
-
 }

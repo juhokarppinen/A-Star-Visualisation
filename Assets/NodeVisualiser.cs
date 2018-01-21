@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// A class which handles the node's visualisation.
+/// A class which handles a node's visualisation.
 /// </summary>
 public class NodeVisualiser : MonoBehaviour
 {

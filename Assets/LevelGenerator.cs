@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// A class which handles level generation and data storage.
+/// </summary>
 public class LevelGenerator : MonoBehaviour
 {
 	[Range (2, 20)]
@@ -16,6 +19,9 @@ public class LevelGenerator : MonoBehaviour
 
 	private GameObject[,] nodes;
 
+	public GameObject[,] Nodes {
+		get { return nodes; }
+	}
 
 	/// <summary>
 	/// Generates a grid of nodes with start, goal and random walls.
@@ -50,7 +56,6 @@ public class LevelGenerator : MonoBehaviour
 	/// <summary>
 	/// Sets a node's type if the chosen recipient's type is "Open".
 	/// </summary>
-	/// <param name="type">Type.</param>
 	private void SetNode (Node.NodeType type, int defaultX, int defaultZ)
 	{
 		int x;
@@ -74,7 +79,7 @@ public class LevelGenerator : MonoBehaviour
 
 
 	/// <summary>
-	/// Creates the walls randomly. Walls can't overlap with start and goal nodes.
+	/// Create the walls randomly. Walls can't overlap with start and goal nodes.
 	/// </summary>
 	private void CreateWalls ()
 	{
@@ -97,7 +102,7 @@ public class LevelGenerator : MonoBehaviour
 
 
 	/// <summary>
-	/// Connects the neighbors.
+	/// Make all neighbor connections on the grid.
 	/// </summary>
 	private void ConnectNeighbors ()
 	{
@@ -114,19 +119,16 @@ public class LevelGenerator : MonoBehaviour
 
 
 	/// <summary>
-	/// Make a connection between the node and another node at nodes[nodeY,nodeX].
+	/// Make a connection between the specified node and another node at nodes[nodeY,nodeX].
 	/// </summary>
-	/// <param name="node">Node.</param>
-	/// <param name="nodeX">Node x.</param>
-	/// <param name="nodeZ">Node z.</param>
-	private void Connect (GameObject node, int nodeX, int nodeZ)
+	private void Connect (GameObject node, int otherX, int otherZ)
 	{
-		// Handle array index out of bounds errors.
-		if (nodeX < 0 || nodeX >= gridWidth || nodeZ < 0 || nodeZ >= gridHeight)
+		// Avoid index out of bounds errors.
+		if (otherX < 0 || otherX >= gridWidth || otherZ < 0 || otherZ >= gridHeight)
 			return;
 
 		Node thisNode = node.GetComponent<Node> ();
-		Node otherNode = nodes [nodeZ, nodeX].GetComponent<Node> ();
+		Node otherNode = nodes [otherZ, otherX].GetComponent<Node> ();
 
 		// Walls are ignored.
 		if (thisNode.Type == Node.NodeType.Wall || otherNode.Type == Node.NodeType.Wall)
@@ -141,54 +143,10 @@ public class LevelGenerator : MonoBehaviour
 	}
 
 
-	// Update is called once per frame
+	/// <summary>
+	/// Tests. Remove from final.
+	/// </summary>
 	void Update ()
 	{
-		if (Input.GetKey (KeyCode.Space)) {
-			int x = Random.Range (0, gridWidth);
-			int z = Random.Range (0, gridHeight);
-			int i = Random.Range (0, 5);
-			Node.NodeType vis;
-
-			switch (i) {
-			case 0:
-				vis = Node.NodeType.Start;
-				break;
-			case 1:
-				vis = Node.NodeType.Goal;
-				break;
-			case 2:
-				vis = Node.NodeType.Open;
-				break;
-			case 3:
-				vis = Node.NodeType.Wall;
-				break;
-			case 4:
-				vis = Node.NodeType.Explored;
-				break;
-			case 5:
-				vis = Node.NodeType.Chosen;
-				break;
-			default:
-				vis = Node.NodeType.Open;
-				break;
-			}
-
-			nodes [z, x].GetComponent<NodeVisualiser> ().Visualise (vis);
-		}
-
-		if (Input.GetKey (KeyCode.B)) {
-			int x = Random.Range (0, gridWidth - 1);
-			int z = Random.Range (0, gridHeight - 1);
-			Node node = nodes [z, x].GetComponent<Node> ();
-			if (node.Type == Node.NodeType.Wall)
-				return;
-			
-			node.Type = Node.NodeType.Explored;
-
-			foreach (Node neighbor in node.Connections.Keys) {
-				neighbor.Type = Node.NodeType.Chosen;
-			}
-		}
 	}
 }
