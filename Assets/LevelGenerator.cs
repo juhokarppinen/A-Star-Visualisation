@@ -37,11 +37,11 @@ public class LevelGenerator : MonoBehaviour
 	{
 		nodes = new GameObject[gridHeight, gridWidth];
 
-		for (var y = 0; y < gridHeight; y++) {
+		for (var z = 0; z < gridHeight; z++) {
 			for (var x = 0; x < gridWidth; x++) {
-				var newNode = (GameObject)Instantiate (nodeObject, new Vector3 (x, 0, y), Quaternion.identity);
+				var newNode = (GameObject)Instantiate (nodeObject, new Vector3 (x, 0, z), Quaternion.identity);
 				newNode.transform.parent = FindObjectOfType<LevelGenerator> ().transform;
-				nodes [y, x] = newNode;
+				nodes [z, x] = newNode;
 			}
 		}
 	}
@@ -51,24 +51,24 @@ public class LevelGenerator : MonoBehaviour
 	/// Sets a node's type if the chosen recipient's type is "Open".
 	/// </summary>
 	/// <param name="type">Type.</param>
-	private void SetNode (Node.NodeType type, int defaultX, int defaultY)
+	private void SetNode (Node.NodeType type, int defaultX, int defaultZ)
 	{
 		int x;
-		int y;
+		int z;
 		if (randomizeStartAndGoal) {
 			x = Random.Range (0, gridWidth - 1);
-			y = Random.Range (0, gridHeight - 1);
+			z = Random.Range (0, gridHeight - 1);
 		} else {
 			x = defaultX;
-			y = defaultY;
+			z = defaultZ;
 		}
 
-		Node recipient = nodes [y, x].GetComponent<Node> ();
+		Node recipient = nodes [z, x].GetComponent<Node> ();
 		if (recipient.Type == Node.NodeType.Open) {
 			recipient.Type = type;
 		} else {
 			// Call the method recursively until an open node is found.
-			SetNode (type, defaultX, defaultY);
+			SetNode (type, defaultX, defaultZ);
 		}
 	}
 
@@ -82,16 +82,16 @@ public class LevelGenerator : MonoBehaviour
 
 		for (var i = 0; i < amountOfWalls; i++) {
 			int x;
-			int y;
+			int z;
 			Node.NodeType candidateType;
 
 			do {
 				x = Random.Range (0, gridWidth);
-				y = Random.Range (0, gridHeight);
-				candidateType = nodes [y, x].GetComponent<Node> ().Type;
+				z = Random.Range (0, gridHeight);
+				candidateType = nodes [z, x].GetComponent<Node> ().Type;
 			} while (candidateType == Node.NodeType.Start || candidateType == Node.NodeType.Goal);
 
-			nodes [y, x].GetComponent<Node> ().Type = Node.NodeType.Wall;
+			nodes [z, x].GetComponent<Node> ().Type = Node.NodeType.Wall;
 		}
 	}
 
@@ -103,10 +103,10 @@ public class LevelGenerator : MonoBehaviour
 	{
 		foreach (var node in nodes) {
 			int nodeX = (int)node.transform.position.x;
-			int nodeY = (int)node.transform.position.y;
-			for (var y = nodeY - 1; y <= nodeY + 1; y++) {
+			int nodeZ = (int)node.transform.position.z;
+			for (var z = nodeZ - 1; z <= nodeZ + 1; z++) {
 				for (var x = nodeX - 1; x <= nodeX + 1; x++) {
-					Connect (node, x, y);
+					Connect (node, x, z);
 				}
 			}
 		}
@@ -118,16 +118,17 @@ public class LevelGenerator : MonoBehaviour
 	/// </summary>
 	/// <param name="node">Node.</param>
 	/// <param name="nodeX">Node x.</param>
-	/// <param name="nodeY">Node y.</param>
-	private void Connect (GameObject node, int nodeX, int nodeY)
+	/// <param name="nodeZ">Node z.</param>
+	private void Connect (GameObject node, int nodeX, int nodeZ)
 	{
 		// Handle array index out of bounds errors.
-		if (nodeX < 0 || nodeX >= gridWidth || nodeY < 0 || nodeY >= gridHeight)
+		if (nodeX < 0 || nodeX >= gridWidth || nodeZ < 0 || nodeZ >= gridHeight)
 			return;
 
-		// Walls are ignored.
 		Node thisNode = node.GetComponent<Node> ();
-		Node otherNode = nodes [nodeY, nodeX].GetComponent<Node> ();
+		Node otherNode = nodes [nodeZ, nodeX].GetComponent<Node> ();
+
+		// Walls are ignored.
 		if (thisNode.Type == Node.NodeType.Wall || otherNode.Type == Node.NodeType.Wall)
 			return;
 
@@ -145,7 +146,7 @@ public class LevelGenerator : MonoBehaviour
 	{
 		if (Input.GetKey (KeyCode.Space)) {
 			int x = Random.Range (0, gridWidth);
-			int y = Random.Range (0, gridHeight);
+			int z = Random.Range (0, gridHeight);
 			int i = Random.Range (0, 5);
 			Node.NodeType vis;
 
@@ -173,7 +174,21 @@ public class LevelGenerator : MonoBehaviour
 				break;
 			}
 
-			nodes [y, x].GetComponent<NodeVisualiser> ().Visualise (vis);
+			nodes [z, x].GetComponent<NodeVisualiser> ().Visualise (vis);
+		}
+
+		if (Input.GetKey (KeyCode.B)) {
+			int x = Random.Range (0, gridWidth - 1);
+			int z = Random.Range (0, gridHeight - 1);
+			Node node = nodes [z, x].GetComponent<Node> ();
+			if (node.Type == Node.NodeType.Wall)
+				return;
+			
+			node.Type = Node.NodeType.Explored;
+
+			foreach (Node neighbor in node.Connections.Keys) {
+				neighbor.Type = Node.NodeType.Chosen;
+			}
 		}
 	}
 }

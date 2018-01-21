@@ -41,8 +41,7 @@ public class Node : MonoBehaviour
 	/// <param name="edgeLength">Edge length between the nodes.</param>
 	public void AddConnection (Node node, float edgeLength)
 	{
-		if (node)
-			connections.Add (node, edgeLength);
+		connections.Add (node, edgeLength);
 	}
 
 
@@ -52,8 +51,7 @@ public class Node : MonoBehaviour
 	/// <param name="node">Node to connect.</param>
 	public void AddConnection (Node node)
 	{
-		if (node)
-			connections.Add (node, Vector3.Distance (node.transform.position, transform.position));
+		connections.Add (node, Vector3.Distance (node.transform.position, transform.position));
 	}
 
 

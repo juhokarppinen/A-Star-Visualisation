@@ -30,8 +30,8 @@ public class NodeVisualiser : MonoBehaviour
 		goalRotation = Quaternion.Euler (new Vector3 (0, 0, -90));
 		openRotation = Quaternion.Euler (new Vector3 (0, 0, 0));
 		wallRotation = Quaternion.Euler (new Vector3 (0, 0, 180));
-		exploredRotation = Quaternion.Euler (new Vector3 (-90, 0, 0));
-		chosenRotation = Quaternion.Euler (new Vector3 (90, 0, 0));
+		exploredRotation = Quaternion.Euler (new Vector3 (90, 0, 0));
+		chosenRotation = Quaternion.Euler (new Vector3 (-90, 0, 0));
 
 		VisualisationMap.Add (Node.NodeType.Start, startRotation);
 		VisualisationMap.Add (Node.NodeType.Goal, goalRotation);
