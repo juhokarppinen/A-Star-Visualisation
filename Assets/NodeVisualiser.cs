@@ -76,7 +76,7 @@ public class NodeVisualiser : MonoBehaviour
 	/// <param name="targetRotation">Target rotation.</param>
 	private IEnumerator RotateToTarget ()
 	{
-		float rotationSpeed = 10.0f;
+		float rotationSpeed = 3.0f;
 		float threshold = 0.01f;
 
 		while (Quaternion.Angle (transform.rotation, targetRotation) > threshold) {

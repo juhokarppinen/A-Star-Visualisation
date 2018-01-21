@@ -55,6 +55,9 @@ public class Node : MonoBehaviour
 	}
 
 
+	/// <summary>
+	/// Initialise the connections dictionary.
+	/// </summary>
 	void Awake ()
 	{
 		connections = new Dictionary<Node, float> ();

@@ -19,9 +19,8 @@ public class LevelGenerator : MonoBehaviour
 
 	private GameObject[,] nodes;
 
-	public GameObject[,] Nodes {
-		get { return nodes; }
-	}
+	private Node startNode;
+	private Node goalNode;
 
 	/// <summary>
 	/// Generates a grid of nodes with start, goal and random walls.
@@ -29,8 +28,8 @@ public class LevelGenerator : MonoBehaviour
 	void Start ()
 	{
 		GenerateGrid ();
-		SetNode (Node.NodeType.Start, 0, 0);
-		SetNode (Node.NodeType.Goal, gridHeight - 1, gridWidth - 1);
+		startNode = SetNode (Node.NodeType.Start, 0, 0);
+		goalNode = SetNode (Node.NodeType.Goal, gridHeight - 1, gridWidth - 1);
 		CreateWalls ();
 		ConnectNeighbors ();
 	}
@@ -56,7 +55,7 @@ public class LevelGenerator : MonoBehaviour
 	/// <summary>
 	/// Sets a node's type if the chosen recipient's type is "Open".
 	/// </summary>
-	private void SetNode (Node.NodeType type, int defaultX, int defaultZ)
+	private Node SetNode (Node.NodeType type, int defaultX, int defaultZ)
 	{
 		int x;
 		int z;
@@ -75,6 +74,7 @@ public class LevelGenerator : MonoBehaviour
 			// Call the method recursively until an open node is found.
 			SetNode (type, defaultX, defaultZ);
 		}
+		return recipient;
 	}
 
 
@@ -144,9 +144,11 @@ public class LevelGenerator : MonoBehaviour
 
 
 	/// <summary>
-	/// Tests. Remove from final.
+	/// Handle keyboard input.
 	/// </summary>
 	void Update ()
 	{
+		if (Input.GetKeyDown (KeyCode.Space))
+			GetComponent<A_Star> ().FindPath (startNode, goalNode);
 	}
 }
