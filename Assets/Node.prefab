@@ -149,7 +149,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4551609228916904}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!4 &4426207489000070
 Transform:
@@ -162,7 +162,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4551609228916904}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!4 &4541111425012688
 Transform:
@@ -175,7 +175,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4551609228916904}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4551609228916904
 Transform:
@@ -187,12 +187,12 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4327537128136078}
-  - {fileID: 4426207489000070}
-  - {fileID: 4541111425012688}
-  - {fileID: 4834518467851764}
   - {fileID: 4563492747702654}
   - {fileID: 4988043505299756}
+  - {fileID: 4426207489000070}
+  - {fileID: 4327537128136078}
+  - {fileID: 4541111425012688}
+  - {fileID: 4834518467851764}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -207,7 +207,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4551609228916904}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!4 &4834518467851764
 Transform:
@@ -220,7 +220,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4551609228916904}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!4 &4988043505299756
 Transform:
@@ -233,7 +233,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4551609228916904}
-  m_RootOrder: 5
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!23 &23010285052761444
 MeshRenderer:
@@ -626,6 +626,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1957282989576588}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89fd23af4a71641f5a82b06a22b637c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d68c23489e344d9f9ba572d7789a2f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startRotation: {x: 0, y: 0, z: 0, w: 0}
+  goalRotation: {x: 0, y: 0, z: 0, w: 0}
+  openRotation: {x: 0, y: 0, z: 0, w: 0}
+  wallRotation: {x: 0, y: 0, z: 0, w: 0}
+  exploredRotation: {x: 0, y: 0, z: 0, w: 0}
+  chosenRotation: {x: 0, y: 0, z: 0, w: 0}
+  targetRotation: {x: 0, y: 0, z: 0, w: 0}
