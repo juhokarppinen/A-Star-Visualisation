@@ -82,9 +82,9 @@ public class LevelGenerator : MonoBehaviour
 	private void SwitchStartNodeWith (Node newNode)
 	{
 		startNode.Type = Node.NodeType.Open;
-		newNode.Type = Node.NodeType.Start;
-		ConnectNeighbors (newNode);
 		startNode = newNode;
+		startNode.Type = Node.NodeType.Start;
+		ConnectNeighbors (startNode);
 	}
 
 
@@ -94,9 +94,9 @@ public class LevelGenerator : MonoBehaviour
 	private void SwitchGoalNodeWith (Node newNode)
 	{
 		goalNode.Type = Node.NodeType.Open;
-		newNode.Type = Node.NodeType.Goal;
-		ConnectNeighbors (newNode);
 		goalNode = newNode;	
+		goalNode.Type = Node.NodeType.Goal;
+		ConnectNeighbors (goalNode);
 	}
 
 
@@ -233,6 +233,7 @@ public class LevelGenerator : MonoBehaviour
 		
 		// Create a valid connection.
 		node.AddConnection (otherNode);
+		otherNode.AddConnection (node);
 	}
 
 
