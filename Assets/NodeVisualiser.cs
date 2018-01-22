@@ -42,24 +42,6 @@ public class NodeVisualiser : MonoBehaviour
 	}
 
 
-	void Update ()
-	{
-		if (Input.GetKeyDown (KeyCode.Alpha1))
-			Visualise (Node.NodeType.Start);
-		if (Input.GetKeyDown (KeyCode.Alpha2))
-			Visualise (Node.NodeType.Goal);
-		if (Input.GetKeyDown (KeyCode.Alpha3))
-			Visualise (Node.NodeType.Open);
-		if (Input.GetKeyDown (KeyCode.Alpha4))
-			Visualise (Node.NodeType.Wall);
-		if (Input.GetKeyDown (KeyCode.Alpha5))
-			Visualise (Node.NodeType.Explored);
-		if (Input.GetKeyDown (KeyCode.Alpha6))
-			Visualise (Node.NodeType.Chosen);
-		
-	}
-
-
 	/// <summary>
 	/// Set the visualisation for this node.
 	/// </summary>
@@ -87,7 +69,7 @@ public class NodeVisualiser : MonoBehaviour
 			yield return null;
 		}
 
-		// Set the rotation to an exact value in case the loop undershoots the target rotation.
+		// Set the rotation to the exact value after approximating it in the loop.
 		transform.rotation = targetRotation;
 	}
 }
