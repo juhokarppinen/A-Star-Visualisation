@@ -11,13 +11,15 @@ public class GameManager : MonoBehaviour
 	private int maxX;
 	private int maxZ;
 
-	// Initialize the Game Manager and generate the grid.
+	/// <summary>
+	/// Initialize the Game Manager and generate the grid.
+	/// </summary>
 	void Start ()
 	{
 		levelGenerator = FindObjectOfType<LevelGenerator> ();
 		maxX = levelGenerator.GridWidth - 1;
 		maxZ = levelGenerator.GridHeight - 1;
-		startPosition = new Vector3 (0, 0, 0);
+		startPosition = Vector3.zero;
 		goalPosition = new Vector3 (maxX, 0, maxZ);
 
 		levelGenerator.InstantiateGrid ();
