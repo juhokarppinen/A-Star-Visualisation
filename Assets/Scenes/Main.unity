@@ -380,7 +380,7 @@ GameObject:
   - component: {fileID: 1230788287}
   - component: {fileID: 1230788286}
   m_Layer: 0
-  m_Name: Level Generator
+  m_Name: Level Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -394,7 +394,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1230788285}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9b32e5f41b324562855c05b37bdf19a, type: 3}
+  m_Script: {fileID: 11500000, guid: e1e9ff3d2b2774fbea3f0f4a20930e3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nodeObject: {fileID: 1957282989576588, guid: 61ea9e019ac57428bba8dd6b2e7baf42, type: 2}
