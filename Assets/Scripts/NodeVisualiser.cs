@@ -7,16 +7,8 @@ using UnityEngine;
 /// </summary>
 public class NodeVisualiser : MonoBehaviour
 {
-	private Quaternion startRotation;
-	private Quaternion goalRotation;
-	private Quaternion openRotation;
-	private Quaternion wallRotation;
-	private Quaternion exploredRotation;
-	private Quaternion chosenRotation;
+	private Dictionary<Node.NodeType, Quaternion> rotationMap;
 	private Quaternion targetRotation;
-
-	private Dictionary<Node.NodeType, Quaternion> VisualisationMap;
-
 
 	/// <summary>
 	/// When this node is instantiated, set rotations corresponding to the faces of the cube and map them 
@@ -24,21 +16,13 @@ public class NodeVisualiser : MonoBehaviour
 	/// </summary>
 	void Awake ()
 	{
-		VisualisationMap = new Dictionary<Node.NodeType, Quaternion> ();
-
-		startRotation = Quaternion.Euler (new Vector3 (0, 0, 90));
-		goalRotation = Quaternion.Euler (new Vector3 (0, 0, -90));
-		openRotation = Quaternion.Euler (new Vector3 (0, 0, 0));
-		wallRotation = Quaternion.Euler (new Vector3 (0, 0, 180));
-		exploredRotation = Quaternion.Euler (new Vector3 (90, 0, 0));
-		chosenRotation = Quaternion.Euler (new Vector3 (-90, 0, 0));
-
-		VisualisationMap.Add (Node.NodeType.Start, startRotation);
-		VisualisationMap.Add (Node.NodeType.Goal, goalRotation);
-		VisualisationMap.Add (Node.NodeType.Open, openRotation);
-		VisualisationMap.Add (Node.NodeType.Wall, wallRotation);
-		VisualisationMap.Add (Node.NodeType.Explored, exploredRotation);
-		VisualisationMap.Add (Node.NodeType.Chosen, chosenRotation);
+		rotationMap = new Dictionary<Node.NodeType, Quaternion> ();
+		rotationMap.Add (Node.NodeType.Start, Quaternion.Euler (new Vector3 (0, 0, 90)));
+		rotationMap.Add (Node.NodeType.Goal, Quaternion.Euler (new Vector3 (0, 0, -90)));
+		rotationMap.Add (Node.NodeType.Open, Quaternion.Euler (new Vector3 (0, 0, 0)));
+		rotationMap.Add (Node.NodeType.Wall, Quaternion.Euler (new Vector3 (0, 0, 180)));
+		rotationMap.Add (Node.NodeType.Explored, Quaternion.Euler (new Vector3 (90, 0, 0)));
+		rotationMap.Add (Node.NodeType.Chosen, Quaternion.Euler (new Vector3 (-90, 0, 0)));
 	}
 
 
@@ -47,7 +31,7 @@ public class NodeVisualiser : MonoBehaviour
 	/// </summary>
 	public void Visualise (Node.NodeType type)
 	{
-		targetRotation = VisualisationMap [type];
+		targetRotation = rotationMap [type];
 		StartCoroutine (RotateToTarget ());
 	}
 
