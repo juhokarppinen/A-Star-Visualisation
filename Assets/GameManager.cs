@@ -46,12 +46,7 @@ public class GameManager : MonoBehaviour
 			goalPosition = BoundedSum (goalPosition, Vector3.right);
 
 		if (Input.GetKeyDown (KeyCode.R)) {
-			levelGenerator.Clear (new List<Node.NodeType> () {
-				Node.NodeType.Wall, 
-				Node.NodeType.Explored, 
-				Node.NodeType.Chosen
-			});
-			levelGenerator.InitialiseGrid (startPosition, goalPosition);
+			levelGenerator.InitializeGrid (startPosition, goalPosition);
 		}
 
 		levelGenerator.MoveStartNode (startPosition);

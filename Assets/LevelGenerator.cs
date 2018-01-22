@@ -101,12 +101,12 @@ public class LevelGenerator : MonoBehaviour
 
 
 	/// <summary>
-	/// Generates a grid of nodes with start, goal and random walls.
+	/// Instantiate and initialize the grid.
 	/// </summary>
 	void Start ()
 	{
 		InstantiateGrid ();
-		InitialiseGrid (Vector3.zero, new Vector3 (gridWidth - 1, 0, gridHeight - 1));
+		InitializeGrid (Vector3.zero, new Vector3 (gridWidth - 1, 0, gridHeight - 1));
 	}
 
 
@@ -128,9 +128,9 @@ public class LevelGenerator : MonoBehaviour
 
 
 	/// <summary>
-	/// Initialises the nodes on the grid.
+	/// Initializes the nodes on the grid.
 	/// </summary>
-	public void InitialiseGrid (Vector3 startPosition, Vector3 goalPosition)
+	public void InitializeGrid (Vector3 startPosition, Vector3 goalPosition)
 	{
 		foreach (var item in FindObjectsOfType<Node>()) {
 			item.Type = Node.NodeType.Open;
@@ -175,8 +175,8 @@ public class LevelGenerator : MonoBehaviour
 			Node.NodeType candidateType;
 
 			do {
-				x = Random.Range (0, gridWidth - 1);
-				z = Random.Range (0, gridHeight - 1);
+				x = Random.Range (0, gridWidth);
+				z = Random.Range (0, gridHeight);
 				candidateType = nodes [z, x].GetComponent<Node> ().Type;
 			} while (candidateType == Node.NodeType.Start || candidateType == Node.NodeType.Goal);
 

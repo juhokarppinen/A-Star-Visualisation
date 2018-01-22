@@ -322,7 +322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9b32e5f41b324562855c05b37bdf19a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  percentageOfWalls: 0.294
+  percentageOfWalls: 0.5
   nodeObject: {fileID: 1957282989576588, guid: 61ea9e019ac57428bba8dd6b2e7baf42, type: 2}
 --- !u!4 &1230788287
 Transform:
