@@ -15,8 +15,8 @@ public class GameManager : MonoBehaviour
 	void Start ()
 	{
 		levelGenerator = FindObjectOfType<LevelGenerator> ();
-		maxX = levelGenerator.gridWidth - 1;
-		maxZ = levelGenerator.gridHeight - 1;
+		maxX = levelGenerator.GridWidth - 1;
+		maxZ = levelGenerator.GridHeight - 1;
 		startPosition = new Vector3 (0, 0, 0);
 		goalPosition = new Vector3 (maxX, 0, maxZ);
 	}
@@ -45,6 +45,14 @@ public class GameManager : MonoBehaviour
 		if (Input.GetKeyDown (KeyCode.RightArrow))
 			goalPosition = BoundedSum (goalPosition, Vector3.right);
 
+		if (Input.GetKeyDown (KeyCode.R)) {
+			levelGenerator.Clear (new List<Node.NodeType> () {
+				Node.NodeType.Wall, 
+				Node.NodeType.Explored, 
+				Node.NodeType.Chosen
+			});
+			levelGenerator.InitialiseGrid (startPosition, goalPosition);
+		}
 
 		levelGenerator.MoveStartNode (startPosition);
 		levelGenerator.MoveGoalNode (goalPosition);

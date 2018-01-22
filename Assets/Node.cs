@@ -41,7 +41,8 @@ public class Node : MonoBehaviour
 	/// <param name="edgeLength">Edge length between the nodes.</param>
 	public void AddConnection (Node node, float edgeLength)
 	{
-		connections.Add (node, edgeLength);
+		if (!connections.ContainsKey (node))
+			connections.Add (node, edgeLength);
 	}
 
 
@@ -51,7 +52,7 @@ public class Node : MonoBehaviour
 	/// <param name="node">Node to connect.</param>
 	public void AddConnection (Node node)
 	{
-		connections.Add (node, Vector3.Distance (node.transform.position, transform.position));
+		AddConnection (node, Vector3.Distance (node.transform.position, transform.position));
 	}
 
 
@@ -60,6 +61,15 @@ public class Node : MonoBehaviour
 	/// </summary>
 	void Awake ()
 	{
-		connections = new Dictionary<Node, float> ();
+		ClearConnections ();
+	}
+
+
+	/// <summary>
+	/// Clears the connections.
+	/// </summary>
+	public void ClearConnections ()
+	{
+		connections = new Dictionary<Node, float> (); 
 	}
 }
