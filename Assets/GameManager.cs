@@ -46,7 +46,9 @@ public class GameManager : MonoBehaviour
 			goalPosition = BoundedSum (goalPosition, Vector3.right);
 
 		if (Input.GetKeyDown (KeyCode.R)) {
-			levelGenerator.InitializeGrid (startPosition, goalPosition);
+			do {
+				levelGenerator.InitializeGrid (startPosition, goalPosition);
+			} while (!AStar.FindPath (levelGenerator.StartNode, levelGenerator.GoalNode));
 		}
 
 		levelGenerator.MoveStartNode (startPosition);
