@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// A class which handles level generation and data storage.
 /// </summary>
-public class LevelGenerator : MonoBehaviour
+public class LevelManager : MonoBehaviour
 {
 	public GameObject nodeObject;
 
@@ -114,7 +114,7 @@ public class LevelGenerator : MonoBehaviour
 		for (var z = 0; z < gridHeight; z++) {
 			for (var x = 0; x < gridWidth; x++) {
 				var newNode = (GameObject)Instantiate (nodeObject, new Vector3 (x, 0, z), Quaternion.identity);
-				newNode.transform.parent = FindObjectOfType<LevelGenerator> ().transform;
+				newNode.transform.parent = FindObjectOfType<LevelManager> ().transform;
 				nodes [z, x] = newNode;
 			}
 		}

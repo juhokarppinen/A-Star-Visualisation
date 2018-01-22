@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 {
 	public Text wallPercentage;
 
-	private LevelGenerator levelGenerator;
+	private LevelManager levelGenerator;
 	private Vector3 startPosition;
 	private Vector3 goalPosition;
 	private int maxX;
@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 	/// </summary>
 	void Start ()
 	{
-		levelGenerator = FindObjectOfType<LevelGenerator> ();
+		levelGenerator = FindObjectOfType<LevelManager> ();
 		maxX = levelGenerator.GridWidth - 1;
 		maxZ = levelGenerator.GridHeight - 1;
 		startPosition = Vector3.zero;
