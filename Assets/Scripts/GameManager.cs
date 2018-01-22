@@ -101,6 +101,8 @@ public class GameManager : MonoBehaviour
 	/// </summary>
 	private Vector3 BoundedSum (Vector3 original, Vector3 direction)
 	{
+		if (original + direction == startPosition || original + direction == goalPosition)
+			return original;
 		float x = original.x + direction.x;
 		float z = original.z + direction.z;
 		if (x < 0 || x > maxX || z < 0 || z > maxZ) {
