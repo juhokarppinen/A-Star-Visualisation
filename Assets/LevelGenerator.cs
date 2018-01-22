@@ -14,13 +14,19 @@ public class LevelGenerator : MonoBehaviour
 	[Range (0, 0.5f)]
 	public float percentageOfWalls;
 	public bool randomizeStartAndGoal;
-
 	public GameObject nodeObject;
 
 	private GameObject[,] nodes;
-
 	private Node startNode;
 	private Node goalNode;
+
+	public Node StartNode {
+		get { return startNode; }
+	}
+
+	public Node GoalNode {
+		get { return goalNode; }
+	}
 
 	/// <summary>
 	/// Generates a grid of nodes with start, goal and random walls.
@@ -140,15 +146,5 @@ public class LevelGenerator : MonoBehaviour
 		
 		// Create a valid connection.
 		thisNode.AddConnection (otherNode);
-	}
-
-
-	/// <summary>
-	/// Handle keyboard input.
-	/// </summary>
-	void Update ()
-	{
-		if (Input.GetKeyDown (KeyCode.Space))
-			GetComponent<A_Star> ().FindPath (startNode, goalNode);
 	}
 }
