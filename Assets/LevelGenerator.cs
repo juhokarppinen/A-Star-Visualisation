@@ -35,7 +35,7 @@ public class LevelGenerator : MonoBehaviour
 	{
 		GenerateGrid ();
 		startNode = SetNode (Node.NodeType.Start, 0, 0);
-		goalNode = SetNode (Node.NodeType.Goal, gridHeight - 1, gridWidth - 1);
+		goalNode = SetNode (Node.NodeType.Goal, gridWidth - 1, gridHeight - 1);
 		CreateWalls ();
 		ConnectNeighbors ();
 	}
@@ -97,8 +97,8 @@ public class LevelGenerator : MonoBehaviour
 			Node.NodeType candidateType;
 
 			do {
-				x = Random.Range (0, gridWidth);
-				z = Random.Range (0, gridHeight);
+				x = Random.Range (0, gridWidth - 1);
+				z = Random.Range (0, gridHeight - 1);
 				candidateType = nodes [z, x].GetComponent<Node> ().Type;
 			} while (candidateType == Node.NodeType.Start || candidateType == Node.NodeType.Goal);
 
