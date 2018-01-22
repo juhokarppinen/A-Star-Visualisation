@@ -27,9 +27,6 @@ public class GameManager : MonoBehaviour
 	/// </summary>
 	void Update ()
 	{
-		if (Input.GetKeyDown (KeyCode.Space))
-			AStar.FindPath (levelGenerator.StartNode, levelGenerator.GoalNode);
-
 		if (Input.GetKeyDown (KeyCode.W))
 			startPosition = BoundedSum (startPosition, Vector3.forward);
 		if (Input.GetKeyDown (KeyCode.S))
@@ -51,6 +48,7 @@ public class GameManager : MonoBehaviour
 
 		levelGenerator.MoveStartNode (startPosition);
 		levelGenerator.MoveGoalNode (goalPosition);
+		AStar.FindPath (levelGenerator.StartNode, levelGenerator.GoalNode);
 	}
 
 
