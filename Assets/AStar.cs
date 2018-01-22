@@ -44,7 +44,8 @@ namespace PathFinding
 
 
 		/// <summary>
-		/// Find the path from start to goal using the A* algorithm.
+		/// Find the path from start to goal using the A* algorithm. Based on the Wikipedia pseudo code example:
+		/// https://en.wikipedia.org/wiki/A*_search_algorithm#Pseudocode
 		/// </summary>
 		/// <returns><c>true</c>, if path was found, <c>false</c> otherwise.</returns>
 		public static bool FindPath (Node start, Node goal)

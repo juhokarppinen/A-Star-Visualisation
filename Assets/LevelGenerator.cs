@@ -66,7 +66,7 @@ public class LevelGenerator : MonoBehaviour
 		startNode = SetNode (Node.NodeType.Start, 0, 0);
 		goalNode = SetNode (Node.NodeType.Goal, gridWidth - 1, gridHeight - 1);
 		CreateWalls ();
-		ConnectNeighbors ();
+		ConnectAllNeighbors ();
 	}
 
 
@@ -139,15 +139,25 @@ public class LevelGenerator : MonoBehaviour
 	/// <summary>
 	/// Make all neighbor connections on the grid.
 	/// </summary>
-	private void ConnectNeighbors ()
+	private void ConnectAllNeighbors ()
 	{
 		foreach (var node in nodes) {
-			int nodeX = (int)node.transform.position.x;
-			int nodeZ = (int)node.transform.position.z;
-			for (var z = nodeZ - 1; z <= nodeZ + 1; z++) {
-				for (var x = nodeX - 1; x <= nodeX + 1; x++) {
-					Connect (node, x, z);
-				}
+			ConnectNeighbors (node);
+		}
+	}
+
+
+	/// <summary>
+	/// Connect neighbors to a single node.
+	/// </summary>
+	/// <param name="node">Node.</param>
+	private void ConnectNeighbors (GameObject node)
+	{
+		int nodeX = (int)node.transform.position.x;
+		int nodeZ = (int)node.transform.position.z;
+		for (var z = nodeZ - 1; z <= nodeZ + 1; z++) {
+			for (var x = nodeX - 1; x <= nodeX + 1; x++) {
+				Connect (node, x, z);
 			}
 		}
 	}
