@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// A class which handles level generation and data storage.
+/// A class which takes care of generating and updating the model.
 /// </summary>
 public class LevelManager : MonoBehaviour
 {

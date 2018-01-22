@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// A class which manages user input and sends messages to the LevelManager for updating the model accordingly.
+/// </summary>
 public class GameManager : MonoBehaviour
 {
 	public Text wallPercentage;
@@ -47,6 +50,7 @@ public class GameManager : MonoBehaviour
 	/// </summary>
 	void Update ()
 	{
+		// Start node movement.
 		if (Input.GetKeyDown (KeyCode.W))
 			startPosition = BoundedSum (startPosition, Vector3.forward);
 		if (Input.GetKeyDown (KeyCode.S))
@@ -56,6 +60,7 @@ public class GameManager : MonoBehaviour
 		if (Input.GetKeyDown (KeyCode.D))
 			startPosition = BoundedSum (startPosition, Vector3.right);
 
+		// Goal node movement.
 		if (Input.GetKeyDown (KeyCode.UpArrow))
 			goalPosition = BoundedSum (goalPosition, Vector3.forward);
 		if (Input.GetKeyDown (KeyCode.DownArrow))
@@ -65,9 +70,7 @@ public class GameManager : MonoBehaviour
 		if (Input.GetKeyDown (KeyCode.RightArrow))
 			goalPosition = BoundedSum (goalPosition, Vector3.right);
 
-		if (Input.GetKeyDown (KeyCode.Space))
-			RandomizeGrid ();
-
+		// Change the amount of walls to generate.
 		if (Input.GetKeyDown (KeyCode.Alpha0))
 			SetWallPercentage (0);
 		if (Input.GetKeyDown (KeyCode.Alpha1))
@@ -88,7 +91,12 @@ public class GameManager : MonoBehaviour
 			SetWallPercentage (0.8f);
 		if (Input.GetKeyDown (KeyCode.Alpha9))
 			SetWallPercentage (0.9f);
+		
+		// Re-randomize walls.
+		if (Input.GetKeyDown (KeyCode.Space))
+			RandomizeGrid ();
 
+		// Update the model.
 		levelGenerator.MoveStartNode (startPosition);
 		levelGenerator.MoveGoalNode (goalPosition);
 		AStar.FindPath (levelGenerator.StartNode, levelGenerator.GoalNode);
