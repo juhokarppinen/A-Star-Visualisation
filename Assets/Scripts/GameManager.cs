@@ -2,9 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+	public Text wallPercentage;
+
 	private LevelGenerator levelGenerator;
 	private Vector3 startPosition;
 	private Vector3 goalPosition;
@@ -62,8 +65,29 @@ public class GameManager : MonoBehaviour
 		if (Input.GetKeyDown (KeyCode.RightArrow))
 			goalPosition = BoundedSum (goalPosition, Vector3.right);
 
-		if (Input.GetKeyDown (KeyCode.R))
+		if (Input.GetKeyDown (KeyCode.Space))
 			RandomizeGrid ();
+
+		if (Input.GetKeyDown (KeyCode.Alpha0))
+			SetWallPercentage (0);
+		if (Input.GetKeyDown (KeyCode.Alpha1))
+			SetWallPercentage (0.1f);
+		if (Input.GetKeyDown (KeyCode.Alpha2))
+			SetWallPercentage (0.2f);
+		if (Input.GetKeyDown (KeyCode.Alpha3))
+			SetWallPercentage (0.3f);
+		if (Input.GetKeyDown (KeyCode.Alpha4))
+			SetWallPercentage (0.4f);
+		if (Input.GetKeyDown (KeyCode.Alpha5))
+			SetWallPercentage (0.5f);
+		if (Input.GetKeyDown (KeyCode.Alpha6))
+			SetWallPercentage (0.6f);
+		if (Input.GetKeyDown (KeyCode.Alpha7))
+			SetWallPercentage (0.7f);
+		if (Input.GetKeyDown (KeyCode.Alpha8))
+			SetWallPercentage (0.8f);
+		if (Input.GetKeyDown (KeyCode.Alpha9))
+			SetWallPercentage (0.9f);
 
 		levelGenerator.MoveStartNode (startPosition);
 		levelGenerator.MoveGoalNode (goalPosition);
@@ -84,5 +108,15 @@ public class GameManager : MonoBehaviour
 		} else {
 			return new Vector3 (x, 0, z);
 		}
+	}
+
+
+	/// <summary>
+	/// Sets the wall percentage and updates the UI.
+	/// </summary>
+	private void SetWallPercentage (float percentage)
+	{
+		levelGenerator.PercentageOfWalls = percentage;
+		wallPercentage.text = "Walls: " + percentage * 100 + "%";
 	}
 }

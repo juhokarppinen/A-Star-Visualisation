@@ -7,10 +7,9 @@ using UnityEngine;
 /// </summary>
 public class LevelGenerator : MonoBehaviour
 {
-	[Range (0, 0.9f)]
-	public float percentageOfWalls;
 	public GameObject nodeObject;
 
+	private float percentageOfWalls = 0.5f;
 	private int gridWidth = 20;
 	private int gridHeight = 20;
 	private GameObject[,] nodes;
@@ -31,6 +30,11 @@ public class LevelGenerator : MonoBehaviour
 
 	public int GridHeight {
 		get { return gridHeight; }
+	}
+
+	public float PercentageOfWalls {
+		get { return percentageOfWalls; }
+		set { percentageOfWalls = value; }
 	}
 
 
