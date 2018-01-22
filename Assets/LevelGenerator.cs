@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class LevelGenerator : MonoBehaviour
 {
-	[Range (0, 0.5f)]
+	[Range (0, 0.9f)]
 	public float percentageOfWalls;
 	public GameObject nodeObject;
 
@@ -101,19 +101,9 @@ public class LevelGenerator : MonoBehaviour
 
 
 	/// <summary>
-	/// Instantiate and initialize the grid.
-	/// </summary>
-	void Start ()
-	{
-		InstantiateGrid ();
-		InitializeGrid (Vector3.zero, new Vector3 (gridWidth - 1, 0, gridHeight - 1));
-	}
-
-
-	/// <summary>
 	/// Instantiates the initial grid of nodes.
 	/// </summary>
-	private void InstantiateGrid ()
+	public void InstantiateGrid ()
 	{
 		nodes = new GameObject[gridHeight, gridWidth];
 

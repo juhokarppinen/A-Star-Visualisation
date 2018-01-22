@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
 	private int maxX;
 	private int maxZ;
 
-	// Use this for initialization
+	// Initialize the Game Manager and generate the grid.
 	void Start ()
 	{
 		levelGenerator = FindObjectOfType<LevelGenerator> ();
@@ -19,6 +19,21 @@ public class GameManager : MonoBehaviour
 		maxZ = levelGenerator.GridHeight - 1;
 		startPosition = new Vector3 (0, 0, 0);
 		goalPosition = new Vector3 (maxX, 0, maxZ);
+
+		levelGenerator.InstantiateGrid ();
+		RandomizeGrid ();
+	}
+
+
+	/// <summary>
+	/// Randomizes the grid until a valid path is found.
+	/// </summary>
+	private void RandomizeGrid ()
+	{
+		do {
+			levelGenerator.InitializeGrid (startPosition, goalPosition);
+		} while (!AStar.FindPath (levelGenerator.StartNode, levelGenerator.GoalNode));
+
 	}
 
 
@@ -45,11 +60,8 @@ public class GameManager : MonoBehaviour
 		if (Input.GetKeyDown (KeyCode.RightArrow))
 			goalPosition = BoundedSum (goalPosition, Vector3.right);
 
-		if (Input.GetKeyDown (KeyCode.R)) {
-			do {
-				levelGenerator.InitializeGrid (startPosition, goalPosition);
-			} while (!AStar.FindPath (levelGenerator.StartNode, levelGenerator.GoalNode));
-		}
+		if (Input.GetKeyDown (KeyCode.R))
+			RandomizeGrid ();
 
 		levelGenerator.MoveStartNode (startPosition);
 		levelGenerator.MoveGoalNode (goalPosition);
