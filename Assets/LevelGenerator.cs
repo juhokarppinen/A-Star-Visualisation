@@ -28,6 +28,35 @@ public class LevelGenerator : MonoBehaviour
 		get { return goalNode; }
 	}
 
+	
+	public void MoveStartNode (Vector3 position)
+	{
+		if (position == startNode.transform.position)
+			return;
+		var x = (int)position.x;
+		var z = (int)position.z;
+		Node newNode = nodes [z, x].GetComponent<Node> ();
+		startNode.Type = Node.NodeType.Open;
+		newNode.Type = Node.NodeType.Start;
+		startNode = newNode;
+		ClearPath ();
+	}
+
+	
+	public void MoveGoalNode (Vector3 position)
+	{
+		if (position == goalNode.transform.position)
+			return;
+		var x = (int)position.x;
+		var z = (int)position.z;
+		Node newNode = nodes [z, x].GetComponent<Node> ();
+		goalNode.Type = Node.NodeType.Open;
+		newNode.Type = Node.NodeType.Goal;
+		goalNode = newNode;	
+		ClearPath ();
+	}
+
+
 	/// <summary>
 	/// Generates a grid of nodes with start, goal and random walls.
 	/// </summary>
@@ -146,5 +175,18 @@ public class LevelGenerator : MonoBehaviour
 		
 		// Create a valid connection.
 		thisNode.AddConnection (otherNode);
+	}
+
+
+	/// <summary>
+	/// Clears the visualisation of a previously found path.
+	/// </summary>
+	private void ClearPath ()
+	{
+		foreach (var nodeContainer in nodes) {
+			Node node = nodeContainer.GetComponent<Node> ();
+			if (node.Type == Node.NodeType.Chosen || node.Type == Node.NodeType.Explored)
+				node.Type = Node.NodeType.Open;
+		}
 	}
 }
